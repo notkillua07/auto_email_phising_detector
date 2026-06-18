@@ -1,0 +1,820 @@
+# LangGraph Email Intelligence Automation
+
+## Project Overview
+
+Build a production-ready Email Intelligence Automation platform using:
+
+- LangGraph
+- LangChain
+- Fine-Tuned LLM
+- FastAPI
+- PostgreSQL
+- Redis/Celery
+- Telegram Bot API
+
+The system should:
+
+1. Receive incoming emails automatically
+2. Preprocess and sanitize content
+3. Analyze emails using multiple AI agents
+4. Aggregate results into structured JSON
+5. Store results in PostgreSQL
+6. Send notifications via Telegram
+7. Provide observability and reliability mechanisms
+
+---
+
+# System Architecture
+
+```text
+Email Source
+     │
+     ▼
+Email Intake Layer
+     │
+     ▼
+Preprocessing Agent
+     │
+     ▼
+Classification Agent
+     │
+     ├── Sentiment Agent
+     ├── Urgency Agent
+     ├── Threat Detection Agent
+     └── Summary Agent
+     │
+     ▼
+Aggregation Agent
+     │
+     ├── Database Persistence
+     └── Telegram Notification
+```
+
+---
+
+# Engineering Rules
+
+Claude Code MUST:
+
+- Use Python 3.11+
+- Use FastAPI
+- Use LangGraph
+- Use LangChain
+- Use Pydantic v2
+- Use SQLAlchemy ORM
+- Use Alembic migrations
+- Use async architecture where possible
+- Enforce structured JSON output
+- Use environment variables for secrets
+- Include logging
+- Include exception handling
+- Include unit tests
+- Follow repository pattern
+- Follow service layer pattern
+
+---
+
+# Recommended Tech Stack
+
+## Backend
+
+- FastAPI
+- LangGraph
+- LangChain
+- Pydantic v2
+
+## LLM
+
+- Fine-tuned Qwen
+- Fine-tuned Llama
+- Fine-tuned Mistral
+
+Serving:
+
+- Ollama
+- vLLM
+
+## Queue
+
+- Redis
+- Celery
+
+## Database
+
+- PostgreSQL
+
+## Notifications
+
+- Telegram Bot API
+
+## Monitoring
+
+- LangSmith
+- Prometheus
+- Grafana
+
+---
+
+# Directory Structure
+
+```text
+email-intelligence/
+
+├── app/
+│   ├── api/
+│   ├── core/
+│   ├── config/
+│   ├── database/
+│   ├── models/
+│   ├── repositories/
+│   ├── services/
+│   ├── agents/
+│   ├── graph/
+│   ├── schemas/
+│   ├── workers/
+│   └── utils/
+│
+├── tests/
+│
+├── migrations/
+│
+├── docs/
+│
+├── docker/
+│
+├── .env.example
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# Phase 1 — Project Initialization
+
+## Objective
+
+Create a scalable backend foundation.
+
+## Tasks
+
+### Infrastructure
+
+- Initialize Git repository
+- Create virtual environment
+- Configure dependency management
+- Configure linting
+- Configure formatting
+- Configure pre-commit hooks
+
+### Environment
+
+Create:
+
+```env
+DATABASE_URL=
+REDIS_URL=
+LLM_BASE_URL=
+LLM_MODEL=
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+LANGSMITH_API_KEY=
+```
+
+### Logging
+
+Implement:
+
+- Structured logging
+- JSON logs
+- Correlation IDs
+
+### Docker
+
+Create:
+
+- Dockerfile
+- docker-compose.yml
+
+## Acceptance Criteria
+
+- Application starts successfully
+- Docker builds successfully
+- Environment variables load correctly
+
+---
+
+# Phase 2 — Database Layer
+
+## Objective
+
+Create persistent storage.
+
+## Tables
+
+### email_logs
+
+```python
+id
+sender
+recipient
+subject
+body
+received_at
+created_at
+```
+
+### analysis_results
+
+```python
+id
+email_id
+classification
+sentiment
+urgency
+threat_score
+summary
+confidence
+model_version
+created_at
+```
+
+### system_errors
+
+```python
+id
+service
+error_type
+message
+stacktrace
+created_at
+```
+
+## Requirements
+
+- SQLAlchemy ORM
+- Alembic migrations
+- Repository pattern
+
+## Acceptance Criteria
+
+- Migrations execute successfully
+- CRUD operations tested
+
+---
+
+# Phase 3 — Email Intake System
+
+## Objective
+
+Receive incoming emails.
+
+## Option A (Recommended)
+
+### Gmail API
+
+Implement:
+
+- Gmail Watch API
+- Webhook listener
+
+## Option B
+
+### IMAP Polling
+
+Implement:
+
+- Scheduled polling
+- Inbox monitoring
+
+## Extract
+
+```json
+{
+  "sender": "",
+  "recipient": "",
+  "subject": "",
+  "body": "",
+  "attachments": [],
+  "timestamp": ""
+}
+```
+
+## Acceptance Criteria
+
+- Email successfully ingested
+- Metadata extracted correctly
+
+---
+
+# Phase 4 — Email Preprocessing Agent
+
+## Objective
+
+Clean and normalize content.
+
+## Responsibilities
+
+### HTML Processing
+
+- Strip HTML
+- Remove embedded styles
+- Extract readable text
+
+### Cleanup
+
+- Remove signatures
+- Remove disclaimers
+- Remove tracking URLs
+- Normalize Unicode
+
+### Security
+
+- Prompt injection filtering
+- Spam-safe preprocessing
+
+### Token Control
+
+- Estimate token count
+- Truncate oversized content
+
+## Output
+
+```json
+{
+  "clean_subject": "",
+  "clean_body": "",
+  "token_count": 0
+}
+```
+
+## Acceptance Criteria
+
+- Cleaned email output generated
+- Malicious patterns filtered
+
+---
+
+# Phase 5 — Fine-Tuned LLM Service
+
+## Objective
+
+Centralize inference logic.
+
+## Components
+
+### Inference Wrapper
+
+Responsibilities:
+
+- Send prompt
+- Handle retries
+- Handle timeouts
+
+### Output Validation
+
+Implement:
+
+- Pydantic validation
+- JSON schema validation
+- Auto-repair malformed JSON
+
+### Fallback
+
+If inference fails:
+
+- Retry
+- Repair JSON
+- Use fallback model
+
+## Acceptance Criteria
+
+- Structured JSON always returned
+- Validation failures handled safely
+
+---
+
+# Phase 6 — LangGraph State Design
+
+## Objective
+
+Create centralized graph state.
+
+## State Schema
+
+```python
+class EmailGraphState(TypedDict):
+    email_id: str
+
+    raw_subject: str
+    raw_body: str
+
+    cleaned_subject: str
+    cleaned_body: str
+
+    classification: str
+    sentiment: str
+    urgency: str
+
+    threat_score: float
+
+    summary: str
+
+    confidence: float
+
+    analysis_result: dict
+
+    errors: list[str]
+```
+
+## Acceptance Criteria
+
+- Shared state works across all nodes
+
+---
+
+# Phase 7 — Agent Node Implementation
+
+## Objective
+
+Implement specialized AI agents.
+
+---
+
+## Agent 1 — Preprocessing Agent
+
+Responsibilities:
+
+- Clean email
+- Normalize content
+
+Output:
+
+```json
+{
+  "cleaned_body": ""
+}
+```
+
+---
+
+## Agent 2 — Classification Agent
+
+Classify:
+
+- Spam
+- Phishing
+- Complaint
+- Inquiry
+- Invoice
+- Support Request
+
+Output:
+
+```json
+{
+  "classification": "",
+  "confidence": 0.0
+}
+```
+
+---
+
+## Agent 3 — Sentiment Agent
+
+Classify:
+
+- Positive
+- Neutral
+- Negative
+
+---
+
+## Agent 4 — Urgency Agent
+
+Classify:
+
+- Low
+- Medium
+- High
+- Critical
+
+---
+
+## Agent 5 — Threat Detection Agent
+
+Detect:
+
+- Phishing
+- Scams
+- Malicious intent
+
+Output:
+
+```json
+{
+  "threat_score": 0.0
+}
+```
+
+---
+
+## Agent 6 — Summary Agent
+
+Generate:
+
+- Executive summary
+- Key insights
+
+---
+
+## Agent 7 — Aggregation Agent
+
+Combine all outputs.
+
+Output:
+
+```json
+{
+  "classification": "",
+  "sentiment": "",
+  "urgency": "",
+  "threat_score": 0,
+  "summary": ""
+}
+```
+
+---
+
+# Phase 8 — LangGraph Orchestration
+
+## Objective
+
+Build graph workflow.
+
+## Workflow
+
+```text
+START
+  │
+  ▼
+Preprocess
+  │
+  ▼
+Classification
+  │
+  ├── Sentiment
+  ├── Urgency
+  ├── Threat Detection
+  └── Summary
+          │
+          ▼
+Aggregation
+          │
+          ▼
+Database Save
+          │
+          ▼
+Telegram Notification
+          │
+          ▼
+END
+```
+
+## Requirements
+
+- Conditional routing
+- Retry logic
+- Fallback paths
+- Failure recovery
+
+## Acceptance Criteria
+
+- Graph executes end-to-end
+
+---
+
+# Phase 9 — Telegram Notification System
+
+## Objective
+
+Send analysis results.
+
+## Features
+
+- Telegram Bot API
+- Markdown-safe formatting
+- Retry handling
+
+## Message Format
+
+```text
+📧 Email Analysis
+
+Category: Support Request
+Sentiment: Negative
+Urgency: High
+Threat Score: 5%
+
+Summary:
+Customer reports recurring issue and requests escalation.
+```
+
+## Acceptance Criteria
+
+- Messages delivered successfully
+- Markdown escaping works
+
+---
+
+# Phase 10 — Error Handling & Observability
+
+## Objective
+
+Production-grade reliability.
+
+## Logging
+
+Implement:
+
+- Structured logging
+- Request tracing
+- Correlation IDs
+
+## Monitoring
+
+Integrate:
+
+- LangSmith
+- Prometheus
+- Grafana
+
+## Reliability
+
+Implement:
+
+- Retry middleware
+- Dead Letter Queue
+- Timeout handling
+
+## Acceptance Criteria
+
+- Failures are traceable
+- Metrics visible
+
+---
+
+# Phase 11 — Security Hardening
+
+## Objective
+
+Protect the system.
+
+## Implement
+
+### Input Protection
+
+- Prompt injection filtering
+- MIME validation
+- Payload limits
+
+### API Security
+
+- API authentication
+- Rate limiting
+- Webhook verification
+
+### Secret Management
+
+- Environment variables only
+
+## Acceptance Criteria
+
+- Malicious emails safely handled
+
+---
+
+# Phase 12 — Testing
+
+## Objective
+
+Ensure reliability.
+
+## Unit Tests
+
+- Parser tests
+- Repository tests
+- Agent tests
+- Graph tests
+
+## Integration Tests
+
+- Full email flow
+- Telegram delivery
+- Database persistence
+
+## Edge Cases
+
+- Malformed emails
+- Broken JSON
+- Timeout simulation
+- Phishing samples
+
+## Acceptance Criteria
+
+- Minimum 80% coverage
+
+---
+
+# Phase 13 — Deployment
+
+## Objective
+
+Production deployment.
+
+## Deliverables
+
+### Docker
+
+- Dockerfile
+- docker-compose
+
+### Infrastructure
+
+- Health checks
+- Readiness checks
+- Production configuration
+
+### Deployment Targets
+
+- Railway
+- Render
+- AWS ECS
+- GCP Cloud Run
+
+## Acceptance Criteria
+
+- One-command deployment
+
+---
+
+# Phase 14 — Future Enhancements
+
+Design system for:
+
+- Slack notifications
+- Discord notifications
+- CRM integration
+- Ticketing systems
+- RAG memory
+- Dashboard analytics
+- Auto-reply generation
+- Human review workflows
+- Multi-tenant support
+
+---
+
+# Final Deliverables
+
+Claude Code MUST produce:
+
+## Source Code
+
+- Complete modular backend
+
+## Documentation
+
+- Setup guide
+- Architecture guide
+- Environment variables guide
+- Deployment guide
+
+## API
+
+- FastAPI Swagger documentation
+
+## Tests
+
+- Minimum 80% coverage
+
+## Docker Support
+
+- Fully containerized deployment
+
+---
+
+# Success Criteria
+
+The project is complete when:
+
+- Emails are automatically ingested
+- Emails are cleaned and validated
+- LangGraph executes successfully
+- Fine-tuned LLM returns structured analysis
+- Results persist in PostgreSQL
+- Telegram notifications are delivered
+- Failures recover automatically
+- Logs and traces are observable
+- Docker deployment works
+- Tests pass successfully

@@ -1,0 +1,15 @@
+# Model weights (large binary files)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+Thumbs.db
+Desktop.ini

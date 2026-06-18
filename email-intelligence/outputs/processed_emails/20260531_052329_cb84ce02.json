@@ -1,0 +1,23 @@
+{
+  "sender": "Hope Z <zhopermobs@gmail.com>",
+  "recipient": "yabescoding@gmail.com",
+  "subject": "URGENT: Security Alert - MFA Re-validation Required",
+  "body": "From: The XGF Factory Security Team admin@security-update-portal-support.com\r\n\r\nDear User,We have detected unusual sign-in activity on your account. To\r\nprevent unauthorized access and avoid permanent account lockout, you must\r\nimmediately re-verify your Multi-Factor Authentication (MFA) and secure\r\nyour credentials.Please click the link below to validate your\r\nidentity:Secure Your Account & Re-validate MFA (This link directs to a\r\nfake, look-alike webpage)If you do not take this action within 30 minutes,\r\nyour access will be suspended.\r\n\r\nSincerely,The Security & Compliance Team",
+  "date": "Sun, 31 May 2026 13:20:29 +0800",
+  "message_id": "<CAOezVz2aE4mVfwJQMqHjsxPBPZUa3CRa4T41eggm+g6FsvLq_g@mail.gmail.com>",
+  "email_id": "cb84ce02-83b2-4f53-a9a1-94b8a8c1c451",
+  "analysis": {
+    "email_id": "cb84ce02-83b2-4f53-a9a1-94b8a8c1c451",
+    "classification": "phishing",
+    "phishing_type": "social_engineering",
+    "sentiment": "negative",
+    "urgency": "critical",
+    "severity": "high",
+    "threat_score": 0.85,
+    "confidence": 0.82,
+    "summary": "The email is a security alert from the XGF Factory Security Team, informing the user that their account has been compromised and requiring immediate re-validation of Multi-Factor Authentication (MFA) to prevent permanent account lockout.",
+    "token_count": 146,
+    "errors": [],
+    "analyzed_at": "2026-05-31T05:23:29.948144+00:00"
+  }
+}

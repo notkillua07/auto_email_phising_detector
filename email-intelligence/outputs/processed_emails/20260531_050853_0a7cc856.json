@@ -1,0 +1,23 @@
+{
+  "sender": "Google <no-reply@accounts.google.com>",
+  "recipient": "yabescoding@gmail.com",
+  "subject": "Security alert",
+  "body": "[image: Google]\r\nPhone number added for 2-Step Verification\r\n\r\n\r\nyabescoding@gmail.com\r\nCodes to sign in to your account now go to a new phone number. If you\r\ndidn't add this number, someone might be using your account. Check and\r\nsecure your account now.\r\nCheck activity\r\n<https://accounts.google.com/AccountChooser?Email=yabescoding@gmail.com&continue=https://myaccount.google.com/alert/nt/1780203776155?rfn%3D249%26rfnc%3D1%26eid%3D4570305506079094323%26et%3D0>\r\nYou can also see security activity at\r\nhttps://myaccount.google.com/notifications\r\nYou received this email to let you know about important changes to your\r\nGoogle Account and services.\r\n\u00a9 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+  "date": "Sun, 31 May 2026 05:02:56 GMT",
+  "message_id": "<sflk88x7eiD1JLzgfr5FPQ@notifications.google.com>",
+  "email_id": "0a7cc856-3af8-4a9d-8e3c-742a9676d9f8",
+  "analysis": {
+    "email_id": "0a7cc856-3af8-4a9d-8e3c-742a9676d9f8",
+    "classification": "phishing",
+    "phishing_type": "social_engineering",
+    "sentiment": "negative",
+    "urgency": "low",
+    "severity": "high",
+    "threat_score": 0.85,
+    "confidence": 0.93,
+    "summary": "Google sends a security alert informing the recipient that their phone number has been added for 2-Step Verification, advising them to check and secure their account.",
+    "token_count": 134,
+    "errors": [],
+    "analyzed_at": "2026-05-31T05:08:53.313919+00:00"
+  }
+}

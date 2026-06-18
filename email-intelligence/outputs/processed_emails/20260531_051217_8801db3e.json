@@ -1,0 +1,23 @@
+{
+  "sender": "Google <no-reply@accounts.google.com>",
+  "recipient": "yabescoding@gmail.com",
+  "subject": "Security alert",
+  "body": "[image: Google]\r\nApp password created to sign in to your account\r\n\r\n\r\nyabescoding@gmail.com\r\nIf you didn't generate this password for email-phising-detector, someone\r\nmight be using your account. Check and secure your account now.\r\nCheck activity\r\n<https://accounts.google.com/AccountChooser?Email=yabescoding@gmail.com&continue=https://myaccount.google.com/alert/nt/1780203839149?rfn%3D20%26rfnc%3D1%26eid%3D-9127288254430175606%26et%3D0>\r\nYou can also see security activity at\r\nhttps://myaccount.google.com/notifications\r\nYou received this email to let you know about important changes to your\r\nGoogle Account and services.\r\n\u00a9 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+  "date": "Sun, 31 May 2026 05:03:59 GMT",
+  "message_id": "<mK0bku7b5daePPtUq-o4CQ@notifications.google.com>",
+  "email_id": "8801db3e-74ec-4e4e-b9b3-d17fdd22335f",
+  "analysis": {
+    "email_id": "8801db3e-74ec-4e4e-b9b3-d17fdd22335f",
+    "classification": "phishing",
+    "phishing_type": "social_engineering",
+    "sentiment": "negative",
+    "urgency": "low",
+    "severity": "high",
+    "threat_score": 0.85,
+    "confidence": 0.93,
+    "summary": "A security alert email from Google informs the recipient that an app password was created for their account, potentially indicating phishing activity. The email advises the user to check and secure their account immediately.",
+    "token_count": 127,
+    "errors": [],
+    "analyzed_at": "2026-05-31T05:12:17.877908+00:00"
+  }
+}

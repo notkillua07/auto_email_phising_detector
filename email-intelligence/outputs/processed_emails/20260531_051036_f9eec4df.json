@@ -1,0 +1,23 @@
+{
+  "sender": "Google <no-reply@accounts.google.com>",
+  "recipient": "yabescoding@gmail.com",
+  "subject": "2-Step Verification turned on",
+  "body": "[image: Google]\r\n2-Step Verification turned on\r\n\r\n\r\nyabescoding@gmail.com\r\n\r\nYour Google Account yabescoding@gmail.com is now protected with 2-Step\r\nVerification. When you sign in on a new or untrusted device, you\u2019ll need\r\nyour second factor to verify your identity.\r\n\r\n*Don't get locked out!*\r\nYou can add a backup phone or get backup codes to use when you don\u2019t have\r\nyour second factor with you.\r\nYou can review your 2SV settings\r\n<https://accounts.google.com/AccountChooser?Email=yabescoding@gmail.com&continue=https://myaccount.google.com/signinoptions/twosv?rfn%3D16%26rfnc%3D1%26eid%3D-1404293408134491023%26et%3D0>\r\nto make changes.\r\nYou can also see security activity at\r\nhttps://myaccount.google.com/notifications\r\nYou received this email to let you know about important changes to your\r\nGoogle Account and services.\r\n\u00a9 2026 Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA",
+  "date": "Sun, 31 May 2026 05:03:03 GMT",
+  "message_id": "<vd4jZA-T6qwP9cwDiGtg6A@notifications.google.com>",
+  "email_id": "f9eec4df-3b1b-4c55-b09c-404c6865503c",
+  "analysis": {
+    "email_id": "f9eec4df-3b1b-4c55-b09c-404c6865503c",
+    "classification": "phishing",
+    "phishing_type": "social_engineering",
+    "sentiment": "positive",
+    "urgency": "low",
+    "severity": "high",
+    "threat_score": 0.85,
+    "confidence": 0.93,
+    "summary": "The sender's Google account has enabled 2-Step Verification, requiring a second factor for sign-in on new or untrusted devices.",
+    "token_count": 178,
+    "errors": [],
+    "analyzed_at": "2026-05-31T05:10:36.172457+00:00"
+  }
+}
